@@ -75,8 +75,11 @@ def calculate_tax(items: List[Dict[str, Any]], discount_amount: float) -> float:
     gross_taxable = sum(
         item.get("price", 0.0) * item.get("quantity", 0)
         for item in items
-        if item.get("category", "").lower() != "gift_card"
+            if item.get("category", "").lower() != "gift_card"
     )
+    for item in items:
+        if item.get("category",0)== "gift_card":
+            return 0.00
 
     if gross_taxable <= 0:
         return 0.00
