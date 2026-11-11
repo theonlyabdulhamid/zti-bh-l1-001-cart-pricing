@@ -1,7 +1,7 @@
 from cart_pricing import calculate_order_summary as COS
 
 order={
-        "customer": {"id": "C-101", "name": "Jane", "tier": "gold"},
+        "customer": {"id": "C-101", "name": "Jane", "tier": ""},
         "items": [
             {
                 "id": "SKU-1",
