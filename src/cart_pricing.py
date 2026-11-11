@@ -109,7 +109,6 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
 
     items = cart.get("items", [])
     customer = cart.get("customer", {})
-
     
     if customer["tier"]:
         tier = customer.get("tier", "standard")
@@ -126,7 +125,7 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
         if item["is_discountable"]and item["name"] != "Gift Card":
             price=item["price"]
             quantity=item["quantity"]
-            amount+=TIER_DISCOUNT_RATES[tier]*(price*quantity)
+            amount+=TIER_DISCOUNT_RATES.get(tier,0.00)*(price*quantity)
         else:
             amount+=0
 
