@@ -17,7 +17,7 @@ order={
                 "price": 50.00,
                 "quantity": 1,
                 "category": "electronics",
-                "is_discountable": False
+                "is_discountable": True
             }
         ]
     }

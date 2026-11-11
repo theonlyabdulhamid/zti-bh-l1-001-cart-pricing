@@ -109,7 +109,12 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
 
     items = cart.get("items", [])
     customer = cart.get("customer", {})
-    tier = customer.get("tier", "standard") if customer else "standard"
+
+    
+    if customer["tier"]:
+        tier = customer.get("tier", "standard")
+    else:
+        tier=customer.get("standard")
 
     # Step 1: Gross Subtotal
     subtotal = calculate_subtotal(items)
@@ -117,7 +122,8 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
     # discount_amount = calculate_tier_discount(subtotal, tier)
     amount=0
     for item in items:
-        if item["is_discountable"]:
+    
+        if item["is_discountable"]and item["name"] != "Gift Card":
             price=item["price"]
             quantity=item["quantity"]
             amount+=TIER_DISCOUNT_RATES[tier]*(price*quantity)
