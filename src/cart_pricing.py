@@ -110,10 +110,7 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
     items = cart.get("items", [])
     customer = cart.get("customer", {})
     
-    if customer["tier"]:
-        tier = customer.get("tier", "standard")
-    else:
-        tier=customer.get("standard")
+    tier = customer.get("tier", "standard") if customer else "standard"
 
     # Step 1: Gross Subtotal
     subtotal = calculate_subtotal(items)
