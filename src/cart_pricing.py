@@ -114,7 +114,19 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
     # Step 1: Gross Subtotal
     subtotal = calculate_subtotal(items)
 
-    discount_amount = calculate_tier_discount(subtotal, tier)
+    # discount_amount = calculate_tier_discount(subtotal, tier)
+    amount=0
+    for item in items:
+        if item["is_discountable"]:
+            price=item["price"]
+            quantity=item["quantity"]
+            amount+=TIER_DISCOUNT_RATES[customer["tier"]]*(price*quantity)
+        else:
+            amount+=0
+
+    discount_amount = round(amount,2)
+
+
 
     # Step 3: Discounted Subtotal
     discounted_subtotal = round(max(0.0, subtotal - discount_amount), 2)
