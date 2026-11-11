@@ -121,13 +121,11 @@ def calculate_order_summary(cart: Dict[str, Any]) -> Dict[str, Any]:
     # discount_amount = calculate_tier_discount(subtotal, tier)
     amount=0
     for item in items:
-    
-        if (item["is_discountable"] != False)and item["category"].lower() != "gift_card":
+
+        if (item["is_discountable"]== True)and item["category"].lower() != "gift_card":
             price=item["price"]
             quantity=item["quantity"]
             amount+=TIER_DISCOUNT_RATES.get(tier,0.00)*(price*quantity)
-        else:
-            amount+=0
 
     discount_amount = round(amount,2)
 
